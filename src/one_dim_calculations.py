@@ -4,7 +4,7 @@ import numpy as np
 
 
 @dataclass
-class Calculations:
+class OneDimCalculations:
     @staticmethod
     def A() -> np.array:
         table = [
@@ -69,8 +69,8 @@ class Calculations:
 
     @staticmethod
     def x_hat() -> np.array:
-        A = Calculations.A()
-        f, p = Calculations.f_and_p()
+        A = OneDimCalculations.A()
+        f, p = OneDimCalculations.f_and_p()
 
         ATP = np.dot(A.T, p)
         ATPA = np.dot(ATP, A)
@@ -83,25 +83,25 @@ class Calculations:
 
     @staticmethod
     def v() -> np.array:
-        A = Calculations.A()
-        f, p = Calculations.f_and_p()
-        x_hat = Calculations.x_hat()
+        A = OneDimCalculations.A()
+        f, p = OneDimCalculations.f_and_p()
+        x_hat = OneDimCalculations.x_hat()
 
         return np.dot(A, x_hat) - f
 
     @staticmethod
     def var_hat() -> np.array:
-        v = Calculations.v()
-        p = Calculations.f_and_p()[1]
+        v = OneDimCalculations.v()
+        p = OneDimCalculations.f_and_p()[1]
         vTp = np.dot(v.T, p)
         vTpv = np.dot(vTp, v)
         return np.sqrt(vTpv / (11 - 2))
 
     @staticmethod
     def C_hat() -> np.array:
-        var = Calculations.var_hat()
-        A = Calculations.A()
-        p = Calculations.f_and_p()[1]
+        var = OneDimCalculations.var_hat()
+        A = OneDimCalculations.A()
+        p = OneDimCalculations.f_and_p()[1]
         ATP = np.dot(A.T, p)
         ATPA = np.dot(ATP, A)
         N = np.linalg.inv(ATPA)  # Normal matrix
@@ -110,12 +110,12 @@ class Calculations:
 
     @staticmethod
     def s_xx() -> np.array:
-        var = Calculations.var_hat()
+        var = OneDimCalculations.var_hat()
         return np.sqrt(var[0][0])
 
     @staticmethod
     def s_yy() -> np.array:
-        var = Calculations.var_hat()
+        var = OneDimCalculations.var_hat()
         return np.sqrt(var[1][1])
 
     @staticmethod

@@ -1,10 +1,19 @@
-from src.calculations import Calculations as calc
+from src.one_dim_calculations import OneDimCalculations
+from src.three_dim_calculations import ThreeDimCalculations
+
+
+def one_dim_calculation() -> None:
+    print(OneDimCalculations.x_hat())
+
+
+def three_dim_calculation() -> None:
+    ThreeDimCalculations.foo({})
 
 
 def main() -> None:
-    C_hat = calc.C_hat()
-    riktig = "Ja" if C_hat[0][1] == C_hat[1][0] else "Nei"
-    print(f"Du har gjort oppgaven riktig: {riktig}")
+    one_dim_calculation()
+    three_dim_calculation()
+
 
 if __name__ == "__main__":
     main()
