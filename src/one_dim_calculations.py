@@ -40,11 +40,11 @@ class OneDimCalculations:
         }
 
         heights = {
-            "HM": 170.8390,
-            "HH": 171.0560,
-            "HØ": 44.6180,
-            "HF": 106.0470,
-        } # Ellipsoidal heights
+            "HM": 170.8390,  # Moholt
+            "HH": 171.0560,  # Havstein
+            "HØ": 44.6180,  # Øya
+            "HF": 106.0470,  # Festningen
+        }  # Ellipsoidal heights
 
         f = np.array([
             heights["HF"] + baselines["L1"][0],
@@ -63,7 +63,7 @@ class OneDimCalculations:
         s_0 = 0.0002
         p = np.eye(len(baselines))
         for i in range(len(baselines)):
-            p[i][i] = s_0 ** 2 / baselines[f"L{i + 1}"][1] ** 2
+            p[i][i] = round(s_0 ** 2 / baselines[f"L{i + 1}"][1] ** 2, 3)
 
         return f, p
 
