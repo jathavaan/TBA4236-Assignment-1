@@ -21,13 +21,15 @@ def bmatrix(a):
 
 def one_dim_calculation() -> None:
     v = odc.v()
-    v = " $ ".join([str(round(x, 3)) for x in v])
     print(v)
 
 
 def three_dim_calculation() -> None:
     tdc = ThreeDimCalculations()
-    print(tdc.LSM())
+    x_hat = tdc.LSM()
+    v = tdc.v()
+    f = tdc.create_f_matrix()
+    print(x_hat * 1000)
 
 
 def main() -> None:

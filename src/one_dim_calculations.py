@@ -70,6 +70,7 @@ class OneDimCalculations:
     @staticmethod
     def x_hat() -> np.array:
         A = OneDimCalculations.A()
+        print(A.shape)
         f, p = OneDimCalculations.f_and_p()
 
         ATP = np.dot(A.T, p)

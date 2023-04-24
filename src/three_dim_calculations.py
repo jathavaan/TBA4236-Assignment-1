@@ -172,7 +172,7 @@ class ThreeDimCalculations:
         return np.array(f_vals)
 
     def LSM(self) -> np.array:
-        A = np.array([
+        A_list = [
             [0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0],
@@ -206,14 +206,58 @@ class ThreeDimCalculations:
             [1, 0, 0, -1, 0, 0],
             [0, 1, 0, 0, -1, 0],
             [0, 0, 1, 0, 0, -1]
-        ])
+        ]
+        A = np.array(A_list)
         p = self.create_weight_matrix()
 
         ATp = np.dot(A.T, p)
         ATpA = np.dot(ATp, A)
         Q = np.linalg.inv(ATpA)
         f = self.create_f_matrix()
-        return np.dot(Q, np.dot(np.dot(A.T, p), f))
+        ATpf = np.dot(ATp, f)
+
+        return np.dot(Q, ATpf)
+
+    def v(self):
+        A_list = [
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [1, 0, 0, 0, 0, 0],
+            [0, 1, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [1, 0, 0, 0, 0, 0],
+            [0, 1, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 1, 0, 0],
+            [0, 0, 0, 0, 1, 0],
+            [0, 0, 0, 0, 0, 1],
+            [0, 0, 0, 1, 0, 0],
+            [0, 0, 0, 0, 1, 0],
+            [0, 0, 0, 0, 0, 1],
+            [0, 0, 0, 1, 0, 0],
+            [0, 0, 0, 0, 1, 0],
+            [0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0],
+            [0, 1, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0],
+            [1, 0, 0, -1, 0, 0],
+            [0, 1, 0, 0, -1, 0],
+            [0, 0, 1, 0, 0, -1]
+        ]
+        A = np.array(A_list)
+        x = self.LSM()
+        f = self.create_f_matrix()
+        return np.dot(A, x) - f
 
     @staticmethod
     def calculate_point(point_component: float, delta: float) -> float:
